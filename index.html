@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALL PAYMENT VALZ MARKET</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      overflow: auto;
+    }
+    *{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+    
+    body {
+      background: url('https://raw.githubusercontent.com/gataubroicape-droid/dat1/main/uploads/732f8e-1768485151164.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+    
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin: 0 auto 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    
+    .btn {
+      background: #3ba6e4;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      margin: 8px auto;
+      font-size: 0.9em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+      width: 90%;
+      max-width: 250px;
+      display: block;
+    }
+    
+    .btn:hover {
+      background: #4169e1;
+      transform: scale(1.02);
+    }
+    
+    .btn-whatsapp {
+      background: #25D366;
+    }
+    
+    .btn-whatsapp:hover {
+      background: #128C7E;
+    }
+    
+    .btn-channel {
+      background: #075E54;
+    }
+    
+    .btn-channel:hover {
+      background: #054D44;
+    }
+    
+    #output-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+    
+    #output {
+      font-size: 1.5em;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      text-align: center;
+      max-width: 90%;
+    }
+    
+    img {
+      max-width: 280px;
+      width: 100%;
+      margin: 15px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    
+    .close-btn {
+      margin-top: 20px;
+      background: #e53935;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    footer {
+      margin-top: auto;
+      padding: 10px;
+      font-size: 0.7em;
+      color: #bbb;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .welcome-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+      z-index: 9999;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #cbd5e1;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .qr img {
+      width: 220px;
+      border-radius: 12px;
+      margin: 30px auto;
+      transition: transform 0.3s ease;
+    }
+
+    .qr:hover img { transform: scale(1.08); }
+
+    .collapsible-container {
+      max-width: 500px;
+      margin: 30px auto;
+      background-color: rgba(30, 41, 59, 0.8);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .collapsible {
+      background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff);
+      background-size: 200% 200%;
+      animation: gradientBtn 3s ease infinite;
+      color: white;
+      cursor: pointer;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      font-size: 1.1em;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .content {
+      padding: 0 18px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      color: #cbd5e1;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+    .opsi-pembayaran {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opsi-pembayaran::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(88, 56, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .opsi-pembayaran:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(88, 56, 255, 0.4);
+            transform: translateX(8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .opsi-pembayaran:hover::before {
+            left: 100%;
+        }
+        
+        opsi-pembayaran:hover .apacoba {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo-dana { 
+            background: linear-gradient(135deg, #00AAFF, #0088CC);
+            box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
+        }
+        
+        .gambar-sppay { 
+            background: linear-gradient(135deg, #4E2A84, #8B5FBF);
+            box-shadow: 0 5px 15px rgba(78, 42, 132, 0.3);
+        }
+        
+        .gambar-gopay { 
+            background: linear-gradient(135deg, #00AED6, #00B4D8);
+            box-shadow: 0 5px 15px rgba(0, 174, 214, 0.3);
+        }
+        
+    .bagian-kiri-pembayaran {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .apacoba {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .tombol-copi {
+            padding: 12px 12px;
+            background: rgba(88, 56, 255, 0.1);
+            border: 3px solid rgba(88, 56, 255, 0.3);
+            border-radius: 12px;
+            color: #5838ff;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tombol-copi::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .tombol-copi:hover {
+            background: #5838ff;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(88, 56, 255, 0.4);
+        }
+
+        .tombol-copi:hover::before {
+            left: 100%;
+        }
+
+        .tombol-copi.ter-copy {
+            background: #10b981;
+            border-color: #10b981;
+            color: #fff;
+        }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      gap: 12px;
+    }
+
+    .btn-link {
+      padding: 14px 24px;
+      background: linear-gradient(45deg, #ff6ec4, #7873f5, #1fd1f9);
+      background-size: 200% 200%;
+      animation: gradientBtn 4s ease infinite;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-link:hover { transform: scale(1.08); }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gradientBtn {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="shine"></div>
+
+<!-- Welcome Animation -->
+<div id="welcome-message" class="welcome-message">
+  <h1>hey, i am Valz Market</h1>
+  <p>Selamat Datang Di Website all payment ajan kink website</p>
+ <p>aku harap kamu tidak salah tranfer :v</p>
+  <button id="go-to-payment" class="btn-link">go to payment</button>
+</div>
+
+
+<audio id="bg-music" loop>
+    <source src="https://files.catbox.moe/chyczo.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+<!-- Konten Utama -->
+<div id="main-content" style="display: none;">
+  <h1>ALL PAYMENT VALZ MARKET</h1>
+  <p>Silakan Pilih Salah Satu Metode Pembayaran Di Bawah Ini</p>
+
+             <div class="bagian-Qr">
+                       <div class="style-qr">
+                    <div class="tempaynya-qris">
+                        <img src="https://files.catbox.moe/vgwpuk.jpg alt="QRIS Code" class="gambar-qris">
+                    </div>
+                </div>
+                <button class="download-tombol" onclick="zoomQRIS()">
+                    <span>⬇</span>
+                    <span>Zoom QRIS</span>
+                </button>
+            </div>
+    <div class="content">
+  </div>
+
+        <p class="subtitle">Scan kode QR di atas dengan aplikasi pembayaran Anda</p>
+
+         <div class="collapsible-container">
+    <button class="collapsible">▼ E-WALLET</button>
+    <div class="content">
+      <div class="metode-bayar">
+                <div class="opsi-pembayaran" onclick="salinNomor('083838675484', 'dana', 'DANA')">
+                    <div class="bagian-kiri-pembayaran">
+                      <div class="apacoba logo-dana">
+  <img src="https://img1.pixhost.to/images/10100/659940313_1762912956295.jpg" alt="Logo Dana" class="logo-img">
+</div>
+                        <div class="info-pembayaran">
+                            <h3>DANA</h3>
+                        </div>
+                    </div>
+                    <button class="tombol-copi" id="tombol-dana">Copy</button>
+                </div>
+           <div class="opsi-pembayaran"
+              onclick="salinNomor('083838675484', 'gopay', 'GOPAY')">
+                    <div class="bagian-kiri-pembayaran">
+                      <div class="apacoba logo-gopay">
+  <img src="https://img1.pixhost.to/images/10100/659940366_1762912965136.jpg" alt="Logo Gopay" class="logo-img">
+</div>
+                        <div class="info-pembayaran">
+                            <h3>GOPAY</h3>
+                        </div>
+                    </div>
+                    <button class="tombol-copi" id="tombol-gopay">Copy</button>
+                </div>
+     </div>
+       <div class="opsi-pembayaran" onclick="salinNomor('-', 'sppay', 'SpPay')">
+                    <div class="bagian-kiri-pembayaran">
+                      <div class="apacoba logo-sppay">
+  <img src="https://img1.pixhost.to/images/10100/659940433_1762912974937.jpg" alt="Logo SpPay" class="logo-img">
+</div>
+                        <div class="info-pembayaran">
+                            <h3>SpPay</h3>
+                        </div>
+                    </div>
+                    <button class="tombol-copi" id="tombol-sppay">Copy</button>
+                </div>
+
+                <footer>klik tombol copy pada menu di atas</footer>
+  </div>
+  
+    <button class="collapsible">▼ TRANSFER BANK</button>
+    <div class="content">
+      <div class="opsi-pembayaran"
+              onclick="salinNomor('eh bntr ada kendala seabannk gw', 'seabank', 'SeaBank')">
+                    <div class="bagian-kiri-pembayaran">
+                      <div class="apacoba logo-seabank">
+  <img src="https://img1.pixhost.to/images/10101/659960671_1762918501715.jpg" alt="Logo SeabBank" class="logo-img">
+</div>
+                        <div class="info-pembayaran">
+                            <h3>SeaBak</h3>
+                        </div>
+                    </div>
+                    <button class="tombol-copi" id="tombol-seabank">Copy</button>
+                </div>
+      <p>BCA : belum tersedia:v</p>
+      <p>MANDIRI : belum tersedia:v</p>
+      <footer>klik tombol copy pada menu di atas</footer>
+    </div>
+    
+    </div>
+
+        <p class="subtitle">[	 !	 ] DEMI KEAMANAN BERSAMA, HARAP BAWA SCREENSHOT BUKTI PEMBAYARAN YA.</p>
+
+<div class="btn-group">
+  <a href="https://wa.me/83119678204" class="btn-link" target="_blank">WhatsApp</a>
+  <a href="https://t.me/babymuahh" class="btn-link" target="_blank">Telegram</a>
+   <a href="Lagi eror "class="btn-link" target="_blank">TikTok</a>
+  <a href="https://chat.whatsapp.com/Dy6o33fyW16DvybFmI8RRw" class="btn-link" target="_blank">Room whatsapp</a>
+  <a class='btn-link' href='/'>Back</a>
+  <a href="https://whatsapp.com/channel/0029Vb7NT2g545uqzv69773u" class="btn-link" target="_blank">Channel Testimoni</a>
+</div>
+<footer>© 2009 - 2026 Valz Market official. Valz kink website</footer>  
+</div>
+<script>
+  // Welcome transition
+  document.getElementById('go-to-payment').addEventListener('click', function () {
+    document.getElementById('welcome-message').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  });
+
+  document.querySelectorAll(".collapsible").forEach(btn => {
+    btn.addEventListener("click", function () {
+      this.classList.toggle("active");
+      const content = this.nextElementSibling;
+      content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
+    });
+  });
+  function unduhQRIS() {
+            const tautan = document.createElement('a');
+            tautan.href = 'https://files.catbox.moe/vgwpuk.jpg';
+            tautan.download = 'ValZ-QRIS.jpg';
+            document.body.appendChild(tautan);
+            tautan.click();
+            document.body.removeChild(tautan);
+            
+            tampilkanNotifikasi('QRIS berhasil didownload!', 'sukses');
+        }
+  function salinNomor(nomor, id, nama) {
+            navigator.clipboard.writeText(nomor).then(() => {
+                const tombol = document.getElementById('tombol-' + id);
+                const teksAsli = tombol.textContent;
+                
+                tombol.textContent = 'Sukses copy';
+                tombol.classList.add('ter-copy');
+                
+                tampilkanNotifikasi(`Nomor ${nama} berhasil dicopy!`, 'sukses');
+                
+                setTimeout(() => {
+                   tombol.textContent = teksAsli;
+                    tombol.classList.remove('ter-copy');
+                }, 2500);
+            });
+        }
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            const about = document.getElementById('about');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                setTimeout(() => {
+                    about.classList.add('active');
+                }, 200);
+            }, 2500);
+        });
+
+        function enterPaymentPage() {
+      const welcomePage = document.getElementById("welcome-page");
+      const paymentPage = document.getElementById("payment-page");
+      
+      welcomePage.style.opacity = "0";
+      
+      setTimeout(() => {
+        welcomePage.style.display = "none";
+        paymentPage.style.display = "flex";
+      }, 500);
+        }
+
+        function showAbout() {
+            const payment = document.getElementById('payment');
+            const about = document.getElementById('about');
+            payment.classList.remove('active');
+            payment.classList.add('hidden');
+            setTimeout(() => {
+                about.classList.remove('hidden');
+                about.classList.add('active');
+            }, 900);
+        }
+  
+</script>
+
+</body>
+</html>
